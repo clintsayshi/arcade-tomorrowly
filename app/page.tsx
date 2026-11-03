@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="page">
       <header className="site-header">
-        <a className="brand" href="/" aria-label="Tomorrowly Arcade home"><span className="brand-mark"><Gamepad2 size={24} strokeWidth={2} aria-hidden="true" /></span><span>tomorrowly<span className="brand-suffix"> / arcade</span></span></a>
+        <div className="brand-group"><a className="brand" href="/" aria-label="Tomorrowly Arcade home"><span className="brand-mark"><Gamepad2 size={24} strokeWidth={2} aria-hidden="true" /></span><span>tomorrowly<span className="brand-suffix"> / arcade</span></span></a><span className="early-access-badge">Early access</span></div>
         <nav aria-label="Contact and company"><a href="mailto:hello@tomorrowly.co.za">hello@tomorrowly.co.za</a><a href="https://tomorrowly.co.za" target="_blank" rel="noopener noreferrer">About us<span className="sr-only"> (opens in a new tab)</span></a></nav>
       </header>
       <main>
@@ -19,7 +19,7 @@ export default function Home() {
             "@type": "ListItem", position: index + 1, name: game.name, url: game.url,
           })),
         }).replace(/</g, "\\u003c") }} />
-        <section className="intro" aria-labelledby="intro-title"><h1 id="intro-title">Good games.<br />Great distractions.</h1><p>A small collection of worlds worth getting lost in. Pick one. Jump in.</p></section>
+        <section className="intro" aria-labelledby="intro-title"><h1 id="intro-title">Good games.<br />Great distractions.</h1><p>An early look at Tomorrowly Arcade. A growing collection of worlds worth getting lost in. Pick one. Jump in.</p></section>
         <section id="games" aria-label="Our games">
           <div className="featured-grid">{games.filter(game => game.featured).map(game => <GameCard key={game.id} game={game} />)}</div>
           <div className="collection-grid">{games.filter(game => !game.featured).map(game => <GameCard key={game.id} game={game} />)}</div>
