@@ -1,8 +1,16 @@
 import { Gamepad2 } from "lucide-react";
 import { GameCard } from "@/components/game-card";
 import { games } from "@/lib/games";
+import { Newsletter } from "@/components/newsletter";
+import { defaultMailchimpFormAction, mailchimpEndpoint } from "@/lib/newsletter";
 
 export default function Home() {
+  const newsletterEndpoint = mailchimpEndpoint(process.env.MAILCHIMP_FORM_ACTION ?? defaultMailchimpFormAction);
+  const signupUrl = newsletterEndpoint ? new URL(newsletterEndpoint) : undefined;
+  if (signupUrl) {
+    signupUrl.pathname = "/subscribe";
+    signupUrl.searchParams.delete("c");
+  }
   return (
     <div className="page">
       <header className="site-header">
@@ -24,6 +32,7 @@ export default function Home() {
           <div className="featured-grid">{games.filter(game => game.featured).map(game => <GameCard key={game.id} game={game} />)}</div>
           <div className="collection-grid">{games.filter(game => !game.featured).map(game => <GameCard key={game.id} game={game} />)}</div>
         </section>
+        <Newsletter enabled={Boolean(newsletterEndpoint)} signupUrl={signupUrl?.href} />
       </main>
       <footer className="site-footer"><span>© {new Date().getFullYear()} Tomorrowly Arcade</span><span>Made for the joy of playing.</span></footer>
     </div>

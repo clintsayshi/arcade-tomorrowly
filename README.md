@@ -65,3 +65,19 @@ The Sentry build tooling currently pulls older `glob` and `minimatch` versions w
 - Browser emitted `game_click` for DinoMunch to GA4 property `G-4SN252QY8D`; receiving/reporting in the GA dashboard has not been independently checked. A local test click is present in analytics.
 - Sentry local server error captured with readable application stack frame: https://tomorrowly-0s.sentry.io/issues/TOMORROWLY-ARCADE-1
 - Dependency audit: no known vulnerabilities after patched overrides.
+
+## Newsletter
+
+The bottom-of-page newsletter form uses your Mailchimp embedded form endpoint. Set `MAILCHIMP_FORM_ACTION` in `.env.local` and in the hosting environment, then rebuild. Copy the HTTPS `action` URL from Mailchimp → Forms → Embedded form. The supplied form requires Email Address and Full Name; both are collected and sent as `EMAIL` and `FNAME`. Keep any necessary audience tags in the configured URL.
+
+The app sends signup requests through `/api/newsletter`, validates the email and form endpoint, and parses Mailchimp’s response without executing its JavaScript. Only a provider-accepted response triggers the game-character celebration. Invalid addresses, duplicate contacts, provider failures and verification challenges display an error instead. A Mailchimp-hosted signup fallback is available for errors and challenges. Double opt-in remains controlled by Mailchimp; the success copy reminds people to check for a confirmation email. No email addresses are sent to Google Analytics.
+
+The supplied Tomorrowly audience endpoint is configured as the default in `lib/newsletter.ts`, so deployment works without extra setup. Override it with `MAILCHIMP_FORM_ACTION`; explicitly setting an empty/invalid value disables signups and shows “Signups open soon” copy. It does not collect or pretend to save email addresses. The celebration respects reduced-motion preferences.
+
+Newsletter integration checks (Node.js 24+):
+
+```sh
+node --test tests/newsletter.test.mjs
+```
+
+Tests stub the provider; they never add test contacts to a real audience. Live audience delivery still needs verification with a consenting real email address after Mailchimp is connected.
