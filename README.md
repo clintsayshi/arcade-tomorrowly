@@ -1,6 +1,6 @@
 # Tomorrowly Arcade
 
-A responsive Next.js App Router application featuring five games, based on the approved pastel playground design.
+A responsive Next.js App Router application featuring six games, based on the approved pastel playground design.
 
 ## Run locally
 
@@ -12,7 +12,7 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open http://localhost:3000. All five games open in new tabs. Contact and About us links point to Tomorrowly. Update the game collection in `lib/games.ts`.
+Open http://localhost:3000. All six games open in new tabs. Contact and About us links point to Tomorrowly. Update the game collection in `lib/games.ts`.
 
 ```sh
 npm run typecheck
@@ -60,7 +60,7 @@ The Sentry build tooling currently pulls older `glob` and `minimatch` versions w
 ## Verification completed
 
 - TypeScript and optimized Next.js production build.
-- Homepage and five game destinations; responsive desktop/phone layout without horizontal overflow.
+- Homepage and six game destinations; responsive desktop/phone layout without horizontal overflow.
 - Canonical URL, sitemap, robots.txt and generated PNG social image.
 - Browser emitted `game_click` for DinoMunch to GA4 property `G-4SN252QY8D`; receiving/reporting in the GA dashboard has not been independently checked. A local test click is present in analytics.
 - Sentry local server error captured with readable application stack frame: https://tomorrowly-0s.sentry.io/issues/TOMORROWLY-ARCADE-1
